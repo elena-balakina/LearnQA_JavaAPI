@@ -68,4 +68,34 @@ public class RedirectionTests {
         System.out.println("Redirect URL: " + locationHeader);
         Assertions.assertNull(locationHeader);
     }
+
+    @Test
+    public void severalLongRedirectsTest() {
+
+        int statusCode = 0;
+        String url = "https://playground.learnqa.ru/api/long_redirect";
+        int redirectCount = 0;
+
+        while (statusCode != 200) {
+            Response response = RestAssured
+                    .given()
+                    .redirects()
+                    .follow(false)
+                    .when()
+                    .get(url)
+                    .andReturn();
+
+            statusCode = response.getStatusCode();
+
+            if (statusCode != 200) {
+                url = response.getHeader("location");
+                redirectCount++;
+                System.out.println("Redirect number " + redirectCount + " to the URL: " + url);
+            }
+
+            statusCode = response.getStatusCode();
+        }
+
+        System.out.println("Total number of redirects is " + redirectCount);
+    }
 }
