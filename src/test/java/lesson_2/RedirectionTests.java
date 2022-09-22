@@ -1,3 +1,5 @@
+package lesson_2;
+
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
