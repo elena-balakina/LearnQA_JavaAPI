@@ -18,10 +18,7 @@ public class UserRegistrationTests extends BaseTestCase {
 
         Map<String, String> userData = new HashMap<>();
         userData.put("email", email);
-        userData.put("password", "123");
-        userData.put("username", "learnQA");
-        userData.put("firstName", "learnQA");
-        userData.put("lastName", "learnQA");
+        userData = DataGenerator.getRegistrationData(userData);
 
         Response responseCreateUser = RestAssured
                 .given()
@@ -40,12 +37,7 @@ public class UserRegistrationTests extends BaseTestCase {
     public void createUserSuccessfullyTest() {
         String email = DataGenerator.getRandomEmail();
 
-        Map<String, String> userData = new HashMap<>();
-        userData.put("email", email);
-        userData.put("password", "123");
-        userData.put("username", "learnQA");
-        userData.put("firstName", "learnQA");
-        userData.put("lastName", "learnQA");
+        Map<String, String> userData = DataGenerator.getRegistrationData();
 
         Response responseCreateUser = RestAssured
                 .given()
